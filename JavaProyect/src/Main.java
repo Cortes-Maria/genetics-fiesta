@@ -8,9 +8,8 @@ import java.awt.image.BufferedImage;
 public class Main {
 
 
-    public static void redimensionar(ArrayList<Zone> pZonas){
+    //Poner todos estos metodos en una clase imagen // Creo que con la clase que creó ud se puede
 
-    }
     public static void disminuirRActual(ArrayList<Zone> pZonas, int aDisminuir){
         if (aDisminuir == 0){
             //Se disminuye 0.10 al final del rango
@@ -26,12 +25,35 @@ public class Main {
                 // actual.termina =  actual. empieza + difActual;
                 pZonas.get(act).getMiRango().setTermina( pZonas.get(act).getMiRango().getEmpieza() + difActual );
             }
+
         }else if (aDisminuir == pZonas.size()){
             //se aumenta 0.10 al inicio
             pZonas.get(pZonas.size()).getMiRango().setEmpieza(
                     pZonas.get(pZonas.size()).getMiRango().getEmpieza() + 0.10);
+            //aqui reacomodo todos los anteriores
+            for(int act = 0; act<pZonas.size()-1; act++){
+                double difActual = pZonas.get(act).getMiRango().getTermina() - pZonas.get(act).getMiRango().getEmpieza();
+                difActual = difActual + (0.10/(double)pZonas.size()-1);
+                pZonas.get(act).getMiRango().setTermina( pZonas.get(act).getMiRango().getEmpieza() + difActual );
+                pZonas.get(act+1).getMiRango().setEmpieza( pZonas.get(act).getMiRango().getTermina() );
+            }
+            pZonas.get(pZonas.size()-1).getMiRango().setTermina( pZonas.get(pZonas.size()).getMiRango().getEmpieza() );
+
         }else{
-            //se disminuye 0.05 al final del rango y se aumenta 0.05 al inicio
+            for(int act = 0; act<aDisminuir; act++){
+                double difActual = pZonas.get(act).getMiRango().getTermina() - pZonas.get(act).getMiRango().getEmpieza();
+                difActual = difActual + (0.10/(double)pZonas.size()-1);
+                pZonas.get(act).getMiRango().setTermina( pZonas.get(act).getMiRango().getEmpieza() + difActual );
+                pZonas.get(act+1).getMiRango().setEmpieza( pZonas.get(act).getMiRango().getTermina() );
+            }
+            pZonas.get(aDisminuir).getMiRango().setTermina( pZonas.get(aDisminuir).getMiRango().getEmpieza() - 0.10 );
+            for(int act = aDisminuir+1; act<pZonas.size(); act++) {
+                double difActual = pZonas.get(act).getMiRango().getTermina() - pZonas.get(act).getMiRango().getEmpieza();
+                pZonas.get(act).getMiRango().setEmpieza(pZonas.get(act - 1).getMiRango().getTermina());
+                difActual = difActual + (0.10 / (double) pZonas.size() - 1);
+                pZonas.get(act).getMiRango().setTermina(pZonas.get(act).getMiRango().getEmpieza() + difActual);
+            }
+
         }
     }
 
@@ -52,14 +74,36 @@ public class Main {
             }
         }else if (aAumentar == pZonas.size()){
             // se disminuye 0.10 al inicio del rango
-            // se redimensionan los cuadrantes restandole
-            //redimensionar todos
+            // se redimensionan los cuadrantes restandole (0.10/(double)pZonas.size()-1)
 
+            pZonas.get(pZonas.size()).getMiRango().setEmpieza(
+                    pZonas.get(pZonas.size()).getMiRango().getEmpieza()- 0.10);
+            //aqui reacomodo todos los anteriores
+            for(int act = 0; act<pZonas.size()-1; act++){
+                double difActual = pZonas.get(act).getMiRango().getTermina() - pZonas.get(act).getMiRango().getEmpieza();
+                difActual = difActual - (0.10/(double)pZonas.size()-1);
+                pZonas.get(act).getMiRango().setTermina( pZonas.get(act).getMiRango().getEmpieza() + difActual );
+                pZonas.get(act+1).getMiRango().setEmpieza( pZonas.get(act).getMiRango().getTermina() );
+            }
+            pZonas.get(pZonas.size()-1).getMiRango().setTermina( pZonas.get(pZonas.size()).getMiRango().getEmpieza() );
         }else{
             // se disminuye 0.05 al inicio del rango y se aumenta 0.05 al final
+            for(int act = 0; act<aAumentar; act++){
+                double difActual = pZonas.get(act).getMiRango().getTermina() - pZonas.get(act).getMiRango().getEmpieza();
+                difActual = difActual - (0.10/(double)pZonas.size()-1);
+                pZonas.get(act).getMiRango().setTermina( pZonas.get(act).getMiRango().getEmpieza() + difActual );
+                pZonas.get(act+1).getMiRango().setEmpieza( pZonas.get(act).getMiRango().getTermina() );
+            }
+            pZonas.get(aAumentar).getMiRango().setTermina( pZonas.get(aAumentar).getMiRango().getEmpieza() + 0.10 );
+
+            for(int act = aAumentar+1; act<pZonas.size(); act++) {
+                double difActual = pZonas.get(act).getMiRango().getTermina() - pZonas.get(act).getMiRango().getEmpieza();
+                pZonas.get(act).getMiRango().setEmpieza(pZonas.get(act - 1).getMiRango().getTermina());
+                difActual = difActual - (0.10 / (double) pZonas.size() - 1);
+                pZonas.get(act).getMiRango().setTermina(pZonas.get(act).getMiRango().getEmpieza() + difActual);
+            }
         }
     }
-
 
     public static void generarProbInicial(ArrayList<Zone> pZonas){
         double incremento = 100.00/(double)pZonas.size();
@@ -96,40 +140,25 @@ public class Main {
             Muestra muestraTomada = Muestra.getMuestra(comienzaX + randomUtil.nextInt(1024/pZonas.size())
                     ,comienzaY + randomUtil.nextInt(1024/pZonas.size()),pImage);
 
-            //variar probabilidad
+            //variar probabilidad <-- depende de la muestra anterior
             if (muestraTomada.r == 255 && muestraTomada.g == 255 && muestraTomada.b == 255){
-                //disminuir el rango del cuadrante actual 0.10
-                //Aumentar los rangos de los otros cuadrantes
-                //double hola = 0.10/(double)pRangosProbabilisticos.size()-1.00;
-                //disminuirRActual(pZonas, cuadranteActualMuestra);
+                disminuirRActual(pZonas,cuadranteActualMuestra);
             } else {
-                //aumentar el rango del cuadrante actual 0.10
-                //decrementar los rangos de los otros cuadrantes
-                //double hola = 0.10/(double)pRangosProbabilisticos.size()-1.00;
-                //aumentarRActual(pZonas, cuadranteActualMuestra);
+                aumentarRActual(pZonas,cuadranteActualMuestra);
+
             }
         }
     }
 
     public static void main(String[] args) throws IOException {
-	// write your code here
 
         //Pasos
+        // 1. generar el array de zonas ArrayList<Zone> cuadrantes = new ArrayList<Zone>();
 
+        //2. BufferedImage image = ImageIO.read(new File("dog.jpg"));
 
-        /*
-        System.out.println("holi");
-        BufferedImage image = ImageIO.read(new File("dog.jpg"));
-        Muestra miMuestra = new Muestra();
-        miMuestra.getMuestra(500,500,image);
-        System.out.println("r "+ miMuestra.r +"  g: "+ miMuestra.g + "  b: " + miMuestra.b);*/
+        //3. muestreo(cuadrantes, cantDeMuestras, image);
 
-
-        // Pasos a implementar
-        // Sacar muestras probabilistas 1/3
-        // Con las muestras sacar subzonas
-        //ArrayList<Rango> probabilidades = generarProbInicial(4,4);
-        //Sacar muestras ArrayList<ArrayList <Muestras>> = sacarMuestras(probabilidades);
 
     }
 }
