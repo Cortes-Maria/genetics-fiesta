@@ -1,10 +1,19 @@
 import java.util.*;
+
 public class Zone {
     int x1, y1, x2, y2;
-    ArrayList<Muestra> muestras;
+    ArrayList<Muestra> muestrasZona;
     Rango miRango;
     //ArrayList<SubZona> subZonas;
 
+
+    public Rango getMiRango() {
+        return miRango;
+    }
+
+    public void setMiRango(Rango miRango) {
+        this.miRango = miRango;
+    }
 
     public int getX1() {
         return x1;
@@ -39,19 +48,19 @@ public class Zone {
     }
 
     public ArrayList<Muestra> getMuestras() {
-        return muestras;
+        return muestrasZona;
     }
 
-    public void setMuestras(ArrayList<Muestra> muestras) {
-        this.muestras = muestras;
+    public void setMuestras(ArrayList<Muestra> pMuestras) {
+        this.muestrasZona = pMuestras;
     }
 
-    public Zone(int x1, int y1, int x2, int y2, ArrayList<Muestra> muestras) {
+    public Zone(int x1, int y1, int x2, int y2, ArrayList<Muestra> pMuestras) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
-        this.muestras = muestras;
+        this.muestrasZona = pMuestras;
     }
 };
 
