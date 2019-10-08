@@ -153,6 +153,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         //Pasos
+        ArrayList<Zone> zonas = new ArrayList<Zone>();
         // 1. generar el array de zonas ArrayList<Zone> cuadrantes = new ArrayList<Zone>();
 
         //2. BufferedImage image = ImageIO.read(new File("dog.jpg"));
