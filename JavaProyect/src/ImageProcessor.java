@@ -24,14 +24,22 @@ public class ImageProcessor {
         return treeImg;
     }
 
-    public void setTreeImg(BufferedImage treeImg) {
-        this.treeImg = treeImg;
+    public void setTreeImg(BufferedImage pNewImg) {
+        this.treeImg =pNewImg;
+    }
+
+    public BufferedImage getImg2() {
+        return img2;
+    }
+
+    public BufferedImage getImg3() {
+        return img3;
     }
 
     private void loadImage (){
         try
         {
-            treeImg = ImageIO.read(new File("C:/Users/gollo/Documents/Universidad/2019 Semestre II/Analisis de Algoritmos/genetics-fiesta/JavaProyect/src/resources/tree.jpg"));
+            treeImg = ImageIO.read(new File("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/dog.jpg"));
             System.out.println("funciono prro");
         }
         catch (IOException e)

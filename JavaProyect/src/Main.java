@@ -151,5 +151,32 @@ public class Main {
     public static void main(String[] args) {
         ImageProcessor prueba = new ImageProcessor();
         prueba.getImageData();
+
+        //Constantes en el proceso
+        ArrayList<Zone> listaZ = new ArrayList<Zone>();
+        int total = 16; //cantidad de cuadrantes
+
+        for(int actualY = 0; actualY<4; actualY++){
+            for(int actualX = 0; actualX<4; actualX++){
+                Zone nueva = new Zone(actualX*256,actualY*256);
+                listaZ.add(nueva);
+            }
+        }
+
+        generarProbInicial(listaZ);
+        for(int actual = 0; actual < listaZ.size(); actual++) {
+            System.out.println(listaZ.get(actual).getMiRango().getEmpieza()+ "termina"+ listaZ.get(actual).getMiRango().getTermina());
+        }
+
+
+        muestreo(listaZ,10000, prueba.getTreeImg());
+        System.out.println("cONTROL "+ listaZ.get(0).getMuestras().size());
+        for(int actual = 0; actual < listaZ.size(); actual++) {
+            System.out.println("Actual " + actual + "tiene "+ listaZ.get(actual).getMuestras().size() + "muestras");
+            System.out.println(listaZ.get(actual).getMiRango().getEmpieza()+ "termina"+ listaZ.get(actual).getMiRango().getTermina());
+        }
+
+
+
     }
 }
