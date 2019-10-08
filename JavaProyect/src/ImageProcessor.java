@@ -15,12 +15,9 @@ public class ImageProcessor {
     }
     public void getImageData(){
         BufferedImage subImage = treeImg.getSubimage(0,0,256,256);
-        for(int x=0; x<256;x++){
-            for(int j=0; j<256;j++){
-             // subImage.getData().getPixel(x,j);
+                int actualRGB = subImage.getRGB(200,150);
+                System.out.print(actualRGB);
 
-            }
-        }
     }
 
     public BufferedImage getTreeImg() {
