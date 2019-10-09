@@ -1,88 +1,11 @@
-<<<<<<< Updated upstream
-import java.util.*;
-
-public class Zone {
-    int x1, y1, x2, y2;
-    ArrayList<Muestra> muestrasZona;
-    Rango miRango;
-    //ArrayList<SubZona> subZonas;
-
-
-    public Rango getMiRango() {
-        return miRango;
-    }
-
-    public void setMiRango(Rango miRango) {
-        this.miRango = miRango;
-    }
-
-    public int getX1() {
-        return x1;
-    }
-
-    public void setX1(int x1) {
-        this.x1 = x1;
-    }
-
-    public int getY1() {
-        return y1;
-    }
-
-    public void setY1(int y1) {
-        this.y1 = y1;
-    }
-
-    public int getX2() {
-        return x2;
-    }
-
-    public void setX2(int x2) {
-        this.x2 = x2;
-    }
-
-    public int getY2() {
-        return y2;
-    }
-
-    public void setY2(int y2) {
-        this.y2 = y2;
-    }
-
-    public ArrayList<Muestra> getMuestras() {
-        return muestrasZona;
-    }
-
-    public void setMuestras(ArrayList<Muestra> pMuestras) {
-        this.muestrasZona = pMuestras;
-    }
-
-    public Zone(int x1, int y1, int x2, int y2, ArrayList<Muestra> pMuestras) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
-        this.muestrasZona = pMuestras;
-    }
-};
-
-
-=======
 import java.util.*;
 
 public class Zone {
     int x1, y1;
-    ArrayList<Muestra> muestrasZona;
-    Rango miRango;
-    //ArrayList<SubZona> subZonas;
+    ArrayList<Sample> samples;
+    double probability;
+    ArrayList<SubZone> subZones;
 
-
-    public Rango getMiRango() {
-        return miRango;
-    }
-
-    public void setMiRango(Rango miRango) {
-        this.miRango = miRango;
-    }
 
     public int getX1() {
         return x1;
@@ -100,21 +23,38 @@ public class Zone {
         this.y1 = y1;
     }
 
-    public ArrayList<Muestra> getMuestras() {
-        return muestrasZona;
+    public ArrayList<Sample> getSamples() {
+        return samples;
     }
 
-    public void setMuestras(ArrayList<Muestra> pMuestras) {
-        this.muestrasZona = pMuestras;
+    public void setSamples(ArrayList<Sample> samples) {
+        this.samples = samples;
+    }
+
+    public double getProbability() {
+        return probability;
+    }
+
+    public void setProbability(double probability) {
+        this.probability = probability;
+    }
+
+    public void setSubZones(ArrayList<SubZone> subZones) {
+        this.subZones = subZones;
+    }
+
+    public ArrayList<SubZone> getSubZones() {
+        return subZones;
     }
 
     public Zone(int x1, int y1) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.miRango = new Rango(0,0);
-        this.muestrasZona = new ArrayList<Muestra>();
+        setX1(x1);
+        setY1(y1);
+        setProbability(1.00);
+        setSamples(new ArrayList<Sample>());
+        setSubZones(new ArrayList<SubZone>());
     }
 };
 
 
->>>>>>> Stashed changes
+
