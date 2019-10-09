@@ -43,24 +43,21 @@ public class Image {
      */
     public void makeSamples(int pPercent){
         int times = pPercent / 2;
-        int cantSamples = ((1024*1024)*pPercent)/100;
+        int cantSamples = ((256*256)*2)/100;
         for(int perCent = 0; perCent<times; perCent++){ // for each percent
             for(int zoneAct = 0; zoneAct<this.zones.size(); zoneAct++){ // for each zone in the array
                 boolean color = false;
                 if (Math.random() < this.zones.get(zoneAct).getProbability()){
                     for(int count = 0; count < cantSamples; count++){
-
                         Sample newSample = Sample.getMuestra(this.zones.get(zoneAct).getX1() + (int)(Math.random()*255)
                                 ,this.zones.get(zoneAct).getY1() + (int)(Math.random()*255),this.bufImage);
-
                         this.zones.get(zoneAct).getSamples().add(newSample);
-
                         if (newSample.r != 255 || newSample.g != 255 || newSample.b != 255)
                             color = true;
                     }
                 }
                 if(color == false){
-                    this.zones.get(zoneAct).setProbability(this.zones.get(zoneAct).getProbability()-0.07);
+                    this.zones.get(zoneAct).setProbability(this.zones.get(zoneAct).getProbability()-0.05);
                 }
             }
         }

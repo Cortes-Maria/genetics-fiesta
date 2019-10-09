@@ -2,19 +2,15 @@ import java.util.*;
 import java.awt.image.BufferedImage;
 
 public class Main {
-//Poner todos estos metodos en una clase imagen // Creo que con la clase que creó ud se puede
-
-
-
 
     public static void main(String[] args) {
         Image image1 = new Image("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/dog.jpg",4);
         Image image2 = new Image("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/tree.jpg",4);
         Image image3 = new Image("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/Muppet.jpg",4);
 
-        image1.makeSamples(6);
-        image2.makeSamples(6);
-        image3.makeSamples(6);
+        image1.makeSamples(15);
+        image2.makeSamples(15);
+        image3.makeSamples(15);
 
         System.out.println("--------------------------- Primera Imagen --------------------------- ");
         for(int actual = 0; actual < image1.getZones().size(); actual++) {
