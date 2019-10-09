@@ -1,66 +1,35 @@
-import java.lang.reflect.GenericArrayType;
 import java.util.*;
-import java.io.*;
-import java.awt.*;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 public class Main {
 //Poner todos estos metodos en una clase imagen // Creo que con la clase que creó ud se puede
 
-    /**
-     *
-     * @param pZones
-     * @param pPercent percent of the zone to be analyzed: must be multiple of 2
-     * @param pImage
-     */
-    public static void makeSamples(ArrayList<Zone> pZones, int pPercent, BufferedImage pImage){
-        int times = pPercent / 2;
-        int cantSamples = ((1024*1024)*pPercent)/100;
-        for(int perCent = 0; perCent<times; perCent++){ // for each percent
-            for(int zoneAct = 0; zoneAct<pZones.size(); zoneAct++){ // for each zone in the array
-                boolean color = false;
-                if (Math.random() < pZones.get(zoneAct).getProbability()){
-                    for(int count = 0; count < cantSamples; count++){
 
-                        Sample newSample = Sample.getMuestra(pZones.get(zoneAct).getX1() + (int)(Math.random()*255)
-                                ,pZones.get(zoneAct).getY1() + (int)(Math.random()*255),pImage);
-
-                        pZones.get(zoneAct).getSamples().add(newSample);
-
-                        if (newSample.r != 255 || newSample.g != 255 || newSample.b != 255)
-                            color = true;
-                    }
-                }
-                if(color == false){
-                    pZones.get(zoneAct).setProbability(pZones.get(zoneAct).getProbability()-0.07);
-                }
-            }
-        }
-
-    }
 
 
     public static void main(String[] args) {
-        ImageProcessor prueba = new ImageProcessor();
-        prueba.getImageData();
+        Image image1 = new Image("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/dog.jpg",4);
+        Image image2 = new Image("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/tree.jpg",4);
+        Image image3 = new Image("C:/Users/Esteban Jiménez/IdeaProjects/genetics-fiesta/JavaProyect/src/resources/Muppet.jpg",4);
 
-        //Constantes en el proceso
-        ArrayList<Zone> listaZ = new ArrayList<Zone>();
-        int total = 4; //quantity of zones in x , y
+        image1.makeSamples(6);
+        image2.makeSamples(6);
+        image3.makeSamples(6);
 
-        for(int actualY = 0; actualY < total; actualY++){
-            for(int actualX = 0; actualX < total;  actualX++){
-                Zone nueva = new Zone(actualX*256,actualY*256);
-                listaZ.add(nueva);
-            }
+        System.out.println("--------------------------- Primera Imagen --------------------------- ");
+        for(int actual = 0; actual < image1.getZones().size(); actual++) {
+            System.out.println("Actual " + actual + "tiene "+ image1.getZones().get(actual).getSamples().size() + "muestras");
+            System.out.println(image1.getZones().get(actual).getProbability());
         }
-
-        makeSamples(listaZ, 20, prueba.getTreeImg());
-        System.out.println("CONTROL "+ listaZ.get(0).getSamples().size());
-        for(int actual = 0; actual < listaZ.size(); actual++) {
-            System.out.println("Actual " + actual + "tiene "+ listaZ.get(actual).getSamples().size() + "muestras");
-            System.out.println(listaZ.get(actual).getProbability());
+        System.out.println("--------------------------- Segunda Imagen --------------------------- ");
+        for(int actual = 0; actual < image2.getZones().size(); actual++) {
+            System.out.println("Actual " + actual + "tiene "+ image2.getZones().get(actual).getSamples().size() + "muestras");
+            System.out.println(image2.getZones().get(actual).getProbability());
+        }
+        System.out.println("--------------------------- Tercera Imagen --------------------------- ");
+        for(int actual = 0; actual < image3.getZones().size(); actual++) {
+            System.out.println("Actual " + actual + "tiene "+ image3.getZones().get(actual).getSamples().size() + "muestras");
+            System.out.println(image3.getZones().get(actual).getProbability());
         }
     }
 }
