@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class SubZona {
+public class SubZone {
     int xSuperior;
     int xInferior;
     int yDerecha;
@@ -65,7 +65,7 @@ public class SubZona {
         this.bSub = pbSub;
     }
 
-    public SubZona(int pxSuperior, int pxInferior, int pyDerecha, int pyIzquierda, int prSub, int pgSub, int pbSub) {
+    public SubZone(int pxSuperior, int pxInferior, int pyDerecha, int pyIzquierda, int prSub, int pgSub, int pbSub) {
         this.xSuperior = pxSuperior;
         this.xInferior = pxInferior;
         this.yDerecha = pyDerecha;

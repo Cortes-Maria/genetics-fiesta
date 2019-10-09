@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 
 public class Main {
 //Poner todos estos metodos en una clase imagen // Creo que con la clase que creó ud se puede
+/*
+
+//// Esto no hace falta \\\\
 
     public static void disminuirRActual(ArrayList<Zone> pZonas, int aDisminuir){
         if (aDisminuir == 0){
@@ -103,16 +106,6 @@ public class Main {
         }
     }
 
-    public static void generarProbInicial(ArrayList<Zone> pZonas){
-        double incremento = 100.00/(double)pZonas.size();
-        double actual = 0;
-        for (int campo = 0; campo < pZonas.size(); campo++){
-            pZonas.get(campo).miRango.empieza = actual;
-            actual += incremento;
-            pZonas.get(campo).miRango.termina = actual;
-        }
-    }
-
     public static int buscarCuadrante(double pNumero, ArrayList<Zone> pZonas){
         int resultado = 0;
         for(int zoneAct = 0; zoneAct<pZonas.size();zoneAct++){
@@ -147,33 +140,27 @@ public class Main {
             }
         }
     }
-
+*/
     public static void main(String[] args) {
         ImageProcessor prueba = new ImageProcessor();
         prueba.getImageData();
 
         //Constantes en el proceso
         ArrayList<Zone> listaZ = new ArrayList<Zone>();
-        int total = 16; //cantidad de cuadrantes
+        int total = 4; //quantity of zones in x , y
 
-        for(int actualY = 0; actualY<4; actualY++){
-            for(int actualX = 0; actualX<4; actualX++){
+        for(int actualY = 0; actualY < total; actualY++){
+            for(int actualX = 0; actualX < total;  actualX++){
                 Zone nueva = new Zone(actualX*256,actualY*256);
                 listaZ.add(nueva);
             }
         }
 
-        generarProbInicial(listaZ);
+        //muestreo(listaZ,10000, prueba.getTreeImg());
+        System.out.println("cONTROL "+ listaZ.get(0).getSamples().size());
         for(int actual = 0; actual < listaZ.size(); actual++) {
-            System.out.println(listaZ.get(actual).getMiRango().getEmpieza()+ "termina"+ listaZ.get(actual).getMiRango().getTermina());
-        }
-
-
-        muestreo(listaZ,10000, prueba.getTreeImg());
-        System.out.println("cONTROL "+ listaZ.get(0).getMuestras().size());
-        for(int actual = 0; actual < listaZ.size(); actual++) {
-            System.out.println("Actual " + actual + "tiene "+ listaZ.get(actual).getMuestras().size() + "muestras");
-            System.out.println(listaZ.get(actual).getMiRango().getEmpieza()+ "termina"+ listaZ.get(actual).getMiRango().getTermina());
+            System.out.println("Actual " + actual + "tiene "+ listaZ.get(actual).getSamples().size() + "muestras");
+            System.out.println(listaZ.get(actual).getProbability());
         }
 
 

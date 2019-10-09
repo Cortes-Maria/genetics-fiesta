@@ -2,18 +2,10 @@ import java.util.*;
 
 public class Zone {
     int x1, y1;
-    ArrayList<Muestra> muestrasZona;
-    Rango miRango;
-    //ArrayList<SubZona> subZonas;
+    ArrayList<Sample> samples;
+    double probability;
+    ArrayList<SubZone> subZones;
 
-
-    public Rango getMiRango() {
-        return miRango;
-    }
-
-    public void setMiRango(Rango miRango) {
-        this.miRango = miRango;
-    }
 
     public int getX1() {
         return x1;
@@ -31,19 +23,36 @@ public class Zone {
         this.y1 = y1;
     }
 
-    public ArrayList<Muestra> getMuestras() {
-        return muestrasZona;
+    public ArrayList<Sample> getSamples() {
+        return samples;
     }
 
-    public void setMuestras(ArrayList<Muestra> pMuestras) {
-        this.muestrasZona = pMuestras;
+    public void setSamples(ArrayList<Sample> samples) {
+        this.samples = samples;
+    }
+
+    public double getProbability() {
+        return probability;
+    }
+
+    public void setProbability(double probability) {
+        this.probability = probability;
+    }
+
+    public void setSubZones(ArrayList<SubZone> subZones) {
+        this.subZones = subZones;
+    }
+
+    public ArrayList<SubZone> getSubZones() {
+        return subZones;
     }
 
     public Zone(int x1, int y1) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.miRango = new Rango(0,0);
-        this.muestrasZona = new ArrayList<Muestra>();
+        setX1(x1);
+        setY1(y1);
+        setProbability(1.00);
+        setSamples(new ArrayList<Sample>());
+        setSubZones(new ArrayList<SubZone>());
     }
 };
 
