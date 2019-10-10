@@ -1,11 +1,18 @@
 import java.util.*;
 
 public class Zone {
-    int x1, y1;
-    ArrayList<Sample> samples;
-    double probability;
-    ArrayList<SubZone> subZones;
+    private int x1, y1;
+    private ArrayList<Sample> samples;
+    private double probability;
+    private ArrayList<SubZone> subZones;
 
+    public Zone(int x1, int y1) {
+        setX1(x1);
+        setY1(y1);
+        setProbability(1.00);
+        setSamples(new ArrayList<Sample>());
+        setSubZones(new ArrayList<SubZone>());
+    }
 
     public int getX1() {
         return x1;
@@ -47,13 +54,7 @@ public class Zone {
         return subZones;
     }
 
-    public Zone(int x1, int y1) {
-        setX1(x1);
-        setY1(y1);
-        setProbability(1.00);
-        setSamples(new ArrayList<Sample>());
-        setSubZones(new ArrayList<SubZone>());
-    }
+
 };
 
 
