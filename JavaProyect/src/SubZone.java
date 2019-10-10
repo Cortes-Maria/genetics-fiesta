@@ -1,13 +1,13 @@
 import java.util.*;
 
 public class SubZone {
-    int xSuperior;
-    int xInferior;
-    int yDerecha;
-    int yIzquierda;
-    int rSub;
-    int gSub;
-    int bSub;
+        private int xSuperior;
+        private int xInferior;
+        private int yDerecha;
+        private int yIzquierda;
+        private int rSub;
+        private int gSub;
+        private int bSub;
 
     public int getxSuperior() {
         return xSuperior;

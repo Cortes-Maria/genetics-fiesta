@@ -7,15 +7,21 @@ import java.util.ArrayList;
 
 public class Image {
     private BufferedImage bufImage = null;
-    public int imageData[] = {};
-    public ArrayList<Zone> zones;
+    private int imageData[] = {};
+    private ArrayList<Zone> zones;
 
 
-    public void makingSomething(int pZoneCantXY){
+    public Image(String pPath, int pZoneCant){
+        loadImage(pPath);
+        this.zones = new ArrayList<Zone>();
+        creatingZones(pZoneCant);
+    }
+
+    public void creatingZones(int pZoneCantXY){
         for(int actualY = 0; actualY < pZoneCantXY; actualY++){
             for(int actualX = 0; actualX < pZoneCantXY;  actualX++){
-                Zone nuevaZ = new Zone(actualX*256,actualY*256);
-                this.zones.add(nuevaZ);
+                Zone newZone = new Zone(actualX*256,actualY*256);
+                this.zones.add(newZone);
             }
         }
     }
@@ -30,12 +36,6 @@ public class Image {
         {
             e.printStackTrace();
         }
-    }
-
-    public void getImageData(){
-        BufferedImage subImage = bufImage.getSubimage(0,0,256,256);
-        int actualRGB = subImage.getRGB(200,150);
-        System.out.print(actualRGB);
     }
 
     /**
@@ -61,7 +61,6 @@ public class Image {
                 }
             }
         }
-
     }
 
     public BufferedImage getBufImage() {
@@ -86,10 +85,5 @@ public class Image {
 
 
 
-    public Image(String pPath, int pZoneCant){
-        loadImage(pPath);
-        this.zones = new ArrayList<Zone>();
-        makingSomething(pZoneCant);
-    }
 
 }
