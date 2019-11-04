@@ -41,7 +41,7 @@ public class Image {
     /**
      * @param pPercent percent of the zone to be analyzed: must be multiple of 2
      */
-    public void makeSamples(int pPercent){
+    public void sampling(int pPercent){
         int times = pPercent / 2;
         int cantSamples = ((256*256)*2)/100;
         for(int perCent = 0; perCent<times; perCent++){ // for each percent
@@ -60,6 +60,27 @@ public class Image {
                     this.zones.get(zoneAct).setProbability(this.zones.get(zoneAct).getProbability()-0.05);
                 }
             }
+        }
+    }
+
+    public void makeTarget(int pDistance){
+        for(int zoneA = 0; zoneA < this.getZones().size(); zoneA ++){
+            this.getZones().get(zoneA).groupSamples(pDistance); // this makes groups of samples and take the distance between them
+
+            //get the total of samples to measure
+            int total = 0;
+            for(int subZoneAct = 0; subZoneAct < this.getZones().get(zoneA).getSubZones().size(); subZoneAct++){
+                total += this.getZones().get(zoneA).getSubZones().get(subZoneAct).getcounter();
+            }
+            for(int subZoneAct = 0; subZoneAct < this.getZones().get(zoneA).getSubZones().size(); subZoneAct++){
+                this.getZones().get(zoneA).getSubZones().get(subZoneAct).setPercent(
+                        (this.getZones().get(zoneA).getSubZones().get(subZoneAct).getcounter()*100.00)/total);
+            }
+            System.out.println("Evaluando zona: " + zoneA);
+            for(int subZoneAct = 0; subZoneAct < this.getZones().get(zoneA).getSubZones().size(); subZoneAct++){
+                System.out.println("Porcentaje of " + subZoneAct + " is: " + this.getZones().get(zoneA).getSubZones().get(subZoneAct).getPercent());
+            }
+
         }
     }
 

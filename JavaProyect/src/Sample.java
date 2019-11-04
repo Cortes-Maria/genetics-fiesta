@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Sample {
@@ -66,6 +67,16 @@ public class Sample {
         sampleTomada.g = (clr & 0x0000ff00) >> 8;
         sampleTomada.b  =  clr & 0x000000ff;
         return sampleTomada;
+    }
+
+    public boolean similarTo(Sample c){
+        double distance = ((c.r - this.r)*(c.r - this.r) + (c.g - this.g)*(c.g - this.g) + (c.b - this.b)*(c.b - this.b))^1/2;
+        System.out.println("Distancia es igual a "+distance);
+        if(distance > 20){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

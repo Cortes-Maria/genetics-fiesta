@@ -8,6 +8,8 @@ public class SubZone {
         private int rSub;
         private int gSub;
         private int bSub;
+        private int counter;
+        private double percent;
 
     public int getxSuperior() {
         return xSuperior;
@@ -65,6 +67,21 @@ public class SubZone {
         this.bSub = pbSub;
     }
 
+    public int getcounter() {
+        return counter;
+    }
+
+    public void setcounter(int pCounter) {
+        this.counter = pCounter;
+    }
+
+    public void counterPlusOne(){ this.counter+=1; }
+
+    public double getPercent(){ return percent; }
+
+    public void setPercent(double pPercent){ this.percent = pPercent; }
+
+
     public SubZone(int pxSuperior, int pxInferior, int pyDerecha, int pyIzquierda, int prSub, int pgSub, int pbSub) {
         this.xSuperior = pxSuperior;
         this.xInferior = pxInferior;
@@ -73,7 +90,10 @@ public class SubZone {
         this.rSub = prSub;
         this.gSub = pgSub;
         this.bSub = pbSub;
+        this.counter = 1;
+        this.percent = 0;
     }
+
 
 }
 
