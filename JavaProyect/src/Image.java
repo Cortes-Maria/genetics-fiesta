@@ -3,18 +3,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Image {
     private BufferedImage bufImage = null;
     private int imageData[] = {};
     private ArrayList<Zone> zones;
+    private ArrayList<HashMap<SubZone,Double>> targetTable;
 
 
     public Image(String pPath, int pZoneCant){
         loadImage(pPath);
         this.zones = new ArrayList<Zone>();
         creatingZones(pZoneCant);
+        targetTable = new ArrayList<HashMap<SubZone, Double>>();
     }
 
     public void creatingZones(int pZoneCantXY){

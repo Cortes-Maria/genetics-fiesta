@@ -96,7 +96,7 @@ public class Zone {
                         check = true;
                     }
                 }
-                if (!check) {
+                if (check == false) {
                     this.getSubZones().add(new SubZone(this.getSamples().get(sample).getX(), this.getSamples().get(sample).getX(),
                             this.getSamples().get(sample).getY(), this.getSamples().get(sample).getY(),
                             this.getSamples().get(sample).getR(), this.getSamples().get(sample).getG(),
