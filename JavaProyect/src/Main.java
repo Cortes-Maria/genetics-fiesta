@@ -13,7 +13,8 @@ public class Main {
         //image3.sampling(16);
         image1.makeTarget(50);
 
-        Genetic genetic = new Genetic(image1.getZones());
+        Genetic genetic = new Genetic(image1.getZones()); //Takes zones and make the target & chromosomatic rep of it.
+
         //image2.makeTarget();
         //image3.makeTarget();
 
