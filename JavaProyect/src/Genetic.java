@@ -1,6 +1,10 @@
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Genetic {
     private ArrayList<Zone> zones;
@@ -59,6 +63,18 @@ public class Genetic {
         }
     }
 
+    private ArrayList<ArrayList<Long>> generateIndividuals(int pCuantity){
+        ArrayList<ArrayList<Long>> populations = new ArrayList<>();     //Un arraylist de arraylist de individuos
+        for(Zone actualZone : zones){                                   //Para cada zona
+            ArrayList<Long> populationInZone = new ArrayList<>();       //Se genera un arraylist de individuos
+            for(int number = 0; number < pCuantity; number++){          //Para la cantidad de individuos de cada zona
+                Long individual = (long)(Math.random()*4294967295L);    //Se genera un individuo
+                populationInZone.add(individual);                       //Se agrega al array de individuos de la zona
+            }
+            populations.add(populationInZone);                      //Se agrega la zona al array de zonas
+        }
+        return populations;
+    }
 
 
 }
