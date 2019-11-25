@@ -15,7 +15,8 @@ public class Genetic {
 
     public Genetic(ArrayList<Zone> pZones){
         zones = pZones;
-
+        fillTargetTable();
+        generateChromosomaticRep();
     }
 
     public ArrayList<Zone> getZones() {
@@ -77,6 +78,9 @@ public class Genetic {
     }
 
     private ValueRange getIndividualRange(long pIndivual, int region){
+        /*
+        It returns the range of the actual individual, based on the region it is.
+         */
         for(ValueRange range : chromosomeTable.get(region).keySet()){
             if(range.isValidValue(pIndivual)){
                 return range;
@@ -85,7 +89,7 @@ public class Genetic {
         return null;
     }
 
-    private double getTargetPercentage(long individual, int region){                 //No la he tocado
+    private double getTargetPercentage(long individual, int region){
         ValueRange range = getIndividualRange(individual, region);
         SubZone subRegion = chromosomeTable.get(region).get(range);
         return targetTable.get(region).get(subRegion);
@@ -102,16 +106,23 @@ public class Genetic {
         return similarIndividuals;
     }
 
-    private boolean fitness(Long individual, int region, ArrayList<Long> population){    //No la he tocado
+    private boolean fitness(Long individual, int region, ArrayList<Long> population){
         ArrayList<Long> similarIndividuals = getSimilarIndividuals(individual, region, population);
         double currentPercentage = (double) similarIndividuals.size() / population.size();
         double targetPercentage = getTargetPercentage(individual, region);
-        return currentPercentage < targetPercentage * 0.95;//IConstants.ACCEPTABILITY_PERCENTAGE;
+        return currentPercentage < targetPercentage * 0.95;                     //IConstants.ACCEPTABILITY_PERCENTAGE;
     }
 
-    private Long intersect(Long firstParent, Long secondParent) {//No la he tocado, esta claro que hace la interseccion, pero no entiendo bien como
+    private Long intersect(Long firstParent, Long secondParent) {
+        /*
+        It takes two parents and set the bit where they are going to be splitted.
+        Creo que lo que hace esta es que mete en bitmask la cant de digitos que determina el punto de interseccion
+        Luego se lo inserta al hijo diciendole... la mitad baja de sus bits es bitmask.
+        Luego calcula los bits altos basandose en el segundo padre. Y le dice al hijo que sus highbits son los
+        que ya calculo.
+         */
         Random randomX = new Random();
-        int intersectionPoint = randomX.nextInt(32);//IConstants.CHROMOSOMES_BITS); //
+        int intersectionPoint = randomX.nextInt(32);        //IConstants.CHROMOSOMES_BITS);
         long bitMask = 4294967295L;
         long child;
         long highBits;
@@ -124,20 +135,25 @@ public class Genetic {
         return child;
     }
 
-    private Long mutate(Long individual){//No la he tocado , se que hace la mutación pero no entiendo bien como la hace
+    private Long mutate(Long individual){
+        /*
+        This method takes a simple individual and make it a little different.
+        Se que lo hace random, pero no tengo claro que es lo que hace despues. Hace varios shift, supongo que
+        modifica al individuo en una minima parte.
+         */
         Random random = new Random();
-        if(random.nextDouble() <= 0.05){//IConstants.MUTATION_PERCENTAGE){
-            long bitMask = 0x1; //It was IConstants.BIT_MASK
+        if(random.nextDouble() <= 0.05){                    //IConstants.MUTATION_PERCENTAGE){
+            long bitMask = 0x1;                             //It was IConstants.BIT_MASK
             int shiftAmount = random.nextInt(31);
             bitMask <<= shiftAmount;
             long bitValue = individual & bitMask;
             bitValue >>= shiftAmount;
             if(bitValue == 1) {
-                bitMask = 4294967295L; //It was IConstants.MAX_LENGHT_VALUE // no se como llegaron a esa cifra
+                bitMask = 4294967295L;                      //It was IConstants.MAX_LENGHT_VALUE // no se como llegaron a esa cifra
                 bitMask -= Math.pow(2, shiftAmount);
                 individual &= bitMask;
             }else{
-                bitMask = 0x1; //It was IConstants.BIT_MASK
+                bitMask = 0x1;                              //It was IConstants.BIT_MASK
                 bitMask <<= shiftAmount;
                 individual |= bitMask;
             }
@@ -170,6 +186,7 @@ public class Genetic {
                 }
                 fitIndividuals.clear();                      //Limpia los individuos fit preparandose para la prox. zona
             }
+            //Aqui termina una generación entonces aca podes hacer un print de como esta la poblacion
         }
     }
 
